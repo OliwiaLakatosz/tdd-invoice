@@ -12,14 +12,14 @@ public abstract class Product {
 	protected Product(String name, BigDecimal price, BigDecimal tax) {
 		this.name = name;
 		if (name == null || name.equals("")) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Name cannot be null.");
 		}
 		// if (name == null || name.equals("")) {
 		// throw new IllegalArgumentException();
 		// } <-- brzydka implementacja
 		this.price = price;
 		if (price == null || price.intValue() < 0) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Price can't be negative");
 		}
 		this.taxPercent = tax;
 	}
