@@ -14,9 +14,6 @@ public abstract class Product {
 		if (name == null || name.equals("")) {
 			throw new IllegalArgumentException("Name cannot be null.");
 		}
-		// if (name == null || name.equals("")) {
-		// throw new IllegalArgumentException();
-		// } <-- brzydka implementacja
 		this.price = price;
 		if (price == null || price.intValue() < 0) {
 			throw new IllegalArgumentException("Price can't be negative");
