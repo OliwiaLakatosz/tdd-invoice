@@ -18,6 +18,9 @@ public abstract class Product {
 //			throw new IllegalArgumentException();
 //		} <-- brzydka implementacja
 		this.price = price;
+		if (price == null || price.intValue() < 0) {
+			throw new IllegalArgumentException();
+		}
 		this.taxPercent = tax;
 	}
 
