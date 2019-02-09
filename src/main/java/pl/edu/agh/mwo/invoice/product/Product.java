@@ -14,9 +14,9 @@ public abstract class Product {
 		if (name == null || name.equals("")) {
 			throw new IllegalArgumentException();
 		}
-//		if (name == null || name.equals("")) {
-//			throw new IllegalArgumentException();
-//		} <-- brzydka implementacja
+		// if (name == null || name.equals("")) {
+		// throw new IllegalArgumentException();
+		// } <-- brzydka implementacja
 		this.price = price;
 		if (price == null || price.intValue() < 0) {
 			throw new IllegalArgumentException();
@@ -37,6 +37,6 @@ public abstract class Product {
 	}
 
 	public BigDecimal getPriceWithTax() {
-		return (this.price.multiply(this.taxPercent)).add(this.price);
+		return this.price.multiply(this.taxPercent).add(this.price);
 	}
 }
