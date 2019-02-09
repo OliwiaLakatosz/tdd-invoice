@@ -1,13 +1,14 @@
 package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collection;
 
 
 import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
-	private Collection<Product> products;
+	private Collection<Product> products = new ArrayList<Product>();
 
 	public void addProduct(Product product) {
 		// Product(String name, BigDecimal price, BigDecimal tax)
@@ -32,10 +33,10 @@ public class Invoice {
 	}
 
 	public BigDecimal getTax() {
-		return null;
+		return BigDecimal.ZERO;
 	}
 
 	public BigDecimal getTotal() {
-		return null;
+		return BigDecimal.ZERO;
 	}
 }
