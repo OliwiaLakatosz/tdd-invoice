@@ -19,6 +19,7 @@ public abstract class Product {
 		this.taxPercent = tax;
 	}
 	// Source > Generate > HashCode and equals()...
+	// containsKey z Invoice juz uzywa sobie tego upgradeowanego equals itp i to containsKey dziala tam
 	@Override
 	public int hashCode() {
 		final int prime = 31;
