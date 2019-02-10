@@ -60,11 +60,14 @@ public class Invoice {
 		DecimalFormat df = new DecimalFormat("0.00");
 		for (Product product : products.keySet()) {
 			BigDecimal quantity = new BigDecimal(products.get(product));
+			sb.append("\n");
 			sb.append(product.getName());
+			sb.append(" ");
 			sb.append(quantity);
+			sb.append(" ");
 			sb.append( df.format(product.getPrice()));
 		}
-		sb.append("Liczba pozycji: " + products.size());
+		sb.append("\nLiczba pozycji: " + products.size());
 		return sb.toString();
 	}
 }

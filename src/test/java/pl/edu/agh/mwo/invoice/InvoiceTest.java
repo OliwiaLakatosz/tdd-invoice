@@ -153,37 +153,45 @@ public class InvoiceTest {
 	
 	@Test
 	public void testPrintedInvoiceHasProductsNames() {
-		//
-	}
-	
-	@Test
-	public void testPrintedInvoiceHasProductsPrices() {
-//		String printedInvoice = invoice.getAsText();
-//		String number = invoice.getNumber().toString();
-//		Assert.assertThat(
-//				printedInvoice,
-//				Matchers.containsString("nr " + number)
-//				);
-	}
-	
-	@Test
-	public void testPrintedInvoiceHasProductsQuantity() {
-//		String printedInvoice = invoice.getAsText();
-//		String number = invoice.getNumber().toString();
-//		Assert.assertThat(
-//				printedInvoice,
-//				Matchers.containsString("nr " + number)
-//				);
+		invoice.addProduct(new OtherProduct("Bulka", new BigDecimal("0.50")));
+		invoice.addProduct(new OtherProduct("Mleko", new BigDecimal("2.50")));
+		String printedInvoice = invoice.getAsText();
+		Assert.assertThat(
+				printedInvoice,
+				Matchers.containsString("Bulka")
+				);
 	}
 	
 	@Test
 	public void testPrintedInvoiceHasAdditionalInfos() {
-		invoice.addProduct(new OtherProduct("Bulka", new BigDecimal("0.50")), 2);
-		invoice.addProduct(new OtherProduct("Mleko", new BigDecimal("2.50")), 2);
+		invoice.addProduct(new OtherProduct("Bulka", new BigDecimal("0.50")));
+		invoice.addProduct(new OtherProduct("Mleko", new BigDecimal("2.50")));
 		String printedInvoice = invoice.getAsText();
 		Assert.assertThat(
 				printedInvoice,
 				Matchers.containsString("Liczba pozycji: 2")
 				);
+	}
+	
+	@Test
+	public void testPrintedInvoiceHasProductsList() {
+		invoice.addProduct(new OtherProduct("Bulka", new BigDecimal("1")), 2);
+		invoice.addProduct(new OtherProduct("Mleko", new BigDecimal("2")), 3);
+		String printedInvoice = invoice.getAsText();
+		Assert.assertThat(
+				printedInvoice,
+				Matchers.containsString("Bulka 2 1,00\nMleko 3 2,00")
+				);
+	}
+	
+	@Test
+	public void testAddingTheSameProductTwice() {
+		invoice.addProduct(
+				new TaxFreeProduct("Chleb", new BigDecimal("5")));
+		invoice.addProduct(
+				new TaxFreeProduct("Chleb", new BigDecimal("5")));
+		Assert.assertThat(
+				invoice.getAsText(),
+				Matchers.containsString("Chleb 2 5,00"));
 	}
 }
