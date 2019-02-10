@@ -139,4 +139,51 @@ public class InvoiceTest {
 			Assert.assertThat(number1, Matchers.lessThan(number2));
 		}
 	}
+	
+	// 1 - Drukowanie 
+	@Test
+	public void testPrintedInvoiceHasNumber() {
+		String printedInvoice = invoice.getAsText();
+		String number = invoice.getNumber().toString();
+		Assert.assertThat(
+				printedInvoice,
+				Matchers.containsString("nr " + number)
+				);
+	}
+	
+	@Test
+	public void testPrintedInvoiceHasProductsNames() {
+		//
+	}
+	
+	@Test
+	public void testPrintedInvoiceHasProductsPrices() {
+//		String printedInvoice = invoice.getAsText();
+//		String number = invoice.getNumber().toString();
+//		Assert.assertThat(
+//				printedInvoice,
+//				Matchers.containsString("nr " + number)
+//				);
+	}
+	
+	@Test
+	public void testPrintedInvoiceHasProductsQuantity() {
+//		String printedInvoice = invoice.getAsText();
+//		String number = invoice.getNumber().toString();
+//		Assert.assertThat(
+//				printedInvoice,
+//				Matchers.containsString("nr " + number)
+//				);
+	}
+	
+	@Test
+	public void testPrintedInvoiceHasAdditionalInfos() {
+		invoice.addProduct(new OtherProduct("Bulka", new BigDecimal("0.50")), 2);
+		invoice.addProduct(new OtherProduct("Mleko", new BigDecimal("2.50")), 2);
+		String printedInvoice = invoice.getAsText();
+		Assert.assertThat(
+				printedInvoice,
+				Matchers.containsString("Liczba pozycji: 2")
+				);
+	}
 }
