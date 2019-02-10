@@ -16,6 +16,11 @@ public class Invoice {
 	public Invoice() {
 		this.number = nextNumber++;
 	}
+	
+	public Integer getNumber() {
+		return number;
+	}
+	
 
 	public void addProduct(Product product) {
 		addProduct(product, 1);
@@ -25,7 +30,13 @@ public class Invoice {
 		if (product == null || quantity <= 0) {
 			throw new IllegalArgumentException();
 		}
-		products.put(product, quantity);
+		
+		if (products.containsKey(product)) {
+			Integer currentQuantity = this.products.get(product);
+			this.products.put(product, currentQuantity + quantity);
+		} else {
+			this.products.put(product, quantity);
+		}
 	}
 
 	public BigDecimal getNetTotal() {
@@ -50,16 +61,13 @@ public class Invoice {
 		return totalGross;
 	}
 
-	public Integer getNumber() {
-		return number;
-	}
-	
 	public String getAsText() {
 		StringBuilder sb = new StringBuilder("");
 		sb.append("Faktura nr " + number);
 		DecimalFormat df = new DecimalFormat("0.00");
 		for (Product product : products.keySet()) {
 			BigDecimal quantity = new BigDecimal(products.get(product));
+			
 			sb.append("\n");
 			sb.append(product.getName());
 			sb.append(" ");
